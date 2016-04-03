@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    Project = mongoose.model('Project');
 
   router.param('userId', function (req, res, next, userId) {
     User.findById(userId, function (err, user) {
