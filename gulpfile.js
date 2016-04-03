@@ -114,6 +114,10 @@ gulp.task('watch', function () {
       gulp.start('css-deps');
     });
 
+    watch(['./public/images/*'], function () {
+      gulp.start('image');
+    });
+
     watch(['./public/less/*.less'], function(){
       gulp.start('less');
     });
