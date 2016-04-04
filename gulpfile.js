@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     ngAnnotate = require('gulp-ng-annotate'),
     watch = require('gulp-watch'),
+    image = require('gulp-image'),
     gulpif = require('gulp-if');
 
 gulp.task('js-deps', function () {
@@ -44,6 +45,12 @@ gulp.task('css-deps', function () {
 
     gulp.src('./public/bower_components/font-awesome/fonts/*')
         .pipe(gulp.dest('./build/fonts'));
+});
+
+gulp.task('image', function () {
+  gulp.src('./public/images/*')
+    .pipe(image())
+    .pipe(gulp.dest('./build/images'));
 });
 
 gulp.task('js', function () {
@@ -99,9 +106,25 @@ gulp.task('watch', function () {
         gulp.start('partials');
     });
 
+    watch(['./public/javascripts/*.css', './public/javascripts/**/*.css'], function () {
+        gulp.start('partials');
+    });
+
+    watch(['./public/css/*.css'], function () {
+      gulp.start('css-deps');
+    });
+
+    watch(['./public/images/*'], function () {
+      gulp.start('image');
+    });
+
+    watch(['./public/less/*.less'], function(){
+      gulp.start('less');
+    });
+
     watch(['./views/index.ejs'], function(){
       gulp.start('partials');
     });
 });
 
-gulp.task('default', ['js-deps', 'partials', 'css-deps', 'js', 'less', 'watch', 'serve']);
+gulp.task('default', ['js-deps', 'partials', 'css-deps', 'image', 'js', 'less', 'watch', 'serve']);
