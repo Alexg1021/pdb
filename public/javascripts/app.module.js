@@ -17,6 +17,12 @@
           templateUrl: 'partials/registration/index.html',
           controller: 'RegistrationController',
           controllerAs: 'registerControl'
+        })
+        .state('dashboard', {
+          url:'/dashboard',
+          templateUrl: 'partials/dashboard/index.html',
+          controller: 'DashboardController',
+          controllerAs: 'dashController'
         });
     });
 
